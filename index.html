@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Азов Патио — Идеальный Отдых в Кучугурах</title>
+    <!-- Modern Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:wght@700&amp;display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#F0F7FF',
+                            100: '#E0F0FF',
+                            200: '#B3DCFD',   // ← твой основной цвет
+                            300: '#8CC9FC',
+                            400: '#5EB0FA',
+                            500: '#3A9AF5',
+                            600: '#1E7ED9',
+                            700: '#1A6BB8',
+                            800: '#1A5899',
+                            900: '#1C4A7A',
+                        },
+                        warm: {
+                            cream: '#F8FAFC',
+                            brown: '#334155'   // тёмный текст
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        display: ['Playfair Display', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(212, 105, 29, 0.85) 0%, rgba(182, 88, 23, 0.75) 50%, rgba(129, 64, 24, 0.7) 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(129, 64, 24, 0.15);
+        }
+        .swiper-pagination-bullet-active {
+            background-color: #D4691D !important;
+        }
+        .swiper-button-next, .swiper-button-prev {
+            color: #D4691D !important;
+        }
+        .room-gallery-thumb {
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        .room-gallery-thumb:hover, .room-gallery-thumb.active {
+            opacity: 1;
+            border-color: #D4691D;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+            h1, h2, h3 {
+            font-family: 'Playfair Display', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .heading-modern {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+        }
+
+        p, span, div {
+            font-feature-settings: "kern" 1, "ss01" 1;
+        }
+
+        .hero-text {
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            line-height: 1.05;
+        }
+
+        .section-title {
+            font-size: 2.75rem;
+            line-height: 1.1;
+        }
+
+        @media (min-width: 768px) {
+            .section-title {
+                font-size: 3.5rem;
+        }
+    }
+    </style>
+</head>
+<body class="bg-warm-cream text-warm-brown">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 md:h-20">
+                <a href="#" class="flex items-center gap-2">
+                    <i data-lucide="home" class="w-8 h-8 text-primary-600"></i>
+                    <span class="text-xl font-bold text-warm-brown">Азов Патио</span>
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#about" class="text-gray-700 hover:text-primary-600 transition-colors font-medium">О нас</a>
+                    <a href="#rooms" class="text-gray-700 hover:text-primary-600 transition-colors font-medium">Номера</a>
+                    <a href="#gallery" class="text-gray-700 hover:text-primary-600 transition-colors font-medium">Галерея</a>
+                    <a href="#reviews" class="text-gray-700 hover:text-primary-600 transition-colors font-medium">Отзывы</a>
+                    <a href="#faq" class="text-gray-700 hover:text-primary-600 transition-colors font-medium">FAQ</a>
+                    <a href="#contacts" class="bg-primary-500 text-white px-6 py-2.5 rounded-full hover:bg-primary-600 transition-all font-medium shadow-lg shadow-primary-500/30">
+                        Забронировать
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="md:hidden p-2">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t">
+            <div class="px-4 py-4 space-y-3">
+                <a href="#about" class="block py-2 text-gray-700 hover:text-primary-600">О нас</a>
+                <a href="#rooms" class="block py-2 text-gray-700 hover:text-primary-600">Номера</a>
+                <a href="#gallery" class="block py-2 text-gray-700 hover:text-primary-600">Галерея</a>
+                <a href="#reviews" class="block py-2 text-gray-700 hover:text-primary-600">Отзывы</a>
+                <a href="#faq" class="block py-2 text-gray-700 hover:text-primary-600">FAQ</a>
+                <a href="#contacts" class="block py-2 text-gray-700 hover:text-primary-600">Контакты</a>
+                <a href="#contacts" class="block bg-primary-500 text-white px-6 py-3 rounded-full text-center">Забронировать</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+<!-- Новый код с твоей фотографией -->
+        <div class="absolute inset-0">
+            <img src="https://i.ibb.co/tTHX8qVb/photo-2026-03-30-19-39-12.jpg" 
+                alt="Азов Патио" 
+                class="w-full h-full object-cover">
+            
+            <!-- Новый мягкий градиент (почти прозрачный, с лёгким затемнением сверху) -->
+            <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/30"></div>
+        </div>
+        
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto pt-20">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight hero-text">
+                Азов Патио — Идеальный Отдых в Кучугурах
+            </h1>
+            <p class="text-xl md:text-2xl text-white/95 mb-4 font-light">
+                Комфортабельные эко-домики из натурального дерева в 120 метрах от теплого моря
+            </p>
+            <p class="text-lg text-white/85 mb-10">
+                Уют и тишина для Вашего идеального отдыха
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#rooms" class="bg-white text-primary-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-caramel-50 transition-all shadow-xl hover:shadow-2xl">
+                    Выбрать номер
+                </a>
+                <a href="#about" class="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white/10 transition-all">
+                    Узнать больше
+                </a>
+            </div>
+            
+            <div class="mt-16 flex justify-center gap-8 md:gap-16 text-white">
+                <div class="text-center">
+                    <div class="text-4xl md:text-5xl font-bold">120м</div>
+                    <div class="text-sm md:text-base text-white/80">до моря</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl md:text-5xl font-bold"></div>
+                    <div class="text-sm md:text-base text-white/80"></div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl md:text-5xl font-bold">100%</div>
+                    <div class="text-sm md:text-base text-white/80">уют</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+            <i data-lucide="chevron-down" class="w-8 h-8 text-white"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 md:py-32 bg-warm-cream">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <span class="inline-block bg-primary-100 text-primary-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">О нашем отеле</span>
+<h2 class="section-title text-4xl md:text-5xl font-bold text-warm-brown mb-6">Уютный отдых у Азовского моря</h2>
+                <p class="text-2xl md:text-3xl font-bold text-primary-600 mb-4">Атмосфера уюта и природный комфорт</p>
+                <p class="text-gray-600 max-w-3xl mx-auto text-lg leading-relaxed">
+                    Территория «Азов Патио» создана для тех, кто ценит тишину и размеренный отдых в окружении живой природы.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center fade-in">
+                <div class="space-y-6">
+                    <p class="text-xl font-bold text-primary-700">Экологичное пространство для жизни</p>
+                    <p class="text-gray-700 leading-relaxed">
+                        Наши гости размещаются в просторных и экологически чистых домиках. Каждый дом оборудован всем необходимым: от кондиционера и телевизора до кухонной зоны с техникой и посудой. Тщательно благоустроенная территория создает атмосферу подлинного умиротворения.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        «Азов Патио» — это уютный гостиничный дворик, где каждый номер выходит на собственное патио в тени зелени. Мы создали пространство для тех, кто ценит тишину, комфорт и близость к морю. Наш дворик утопает в зелени, а закрытая территория позволяет забыть о суете и полностью расслабиться. Здесь нет соседей сверху — только небо, морской бриз и звуки природы.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-4 pt-4">
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="shield-check" class="w-6 h-6 text-primary-600"></i>
+                            <span class="text-gray-700">Закрытая территория</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="wifi" class="w-6 h-6 text-primary-600"></i>
+                            <span class="text-gray-700">Бесплатный Wi-Fi</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="snowflake" class="w-6 h-6 text-primary-600"></i>
+                            <span class="text-gray-700">Кондиционеры</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="tv" class="w-6 h-6 text-primary-600"></i>
+                            <span class="text-gray-700">Телевизор</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <img src="https://i.ibb.co/Wdf8Vnt/photo-2026-03-30-19-39-02-2.jpg" 
+                        alt="Территория отеля" 
+                        class="rounded-3xl shadow-2xl w-full">
+                    <div class="absolute -bottom-6 -left-6 bg-primary-500 text-white p-6 rounded-2xl shadow-xl">
+                        <div class="text-4xl font-bold">120м</div>
+                        <div class="text-sm">до пляжа</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nature Section -->
+    <section class="py-20 md:py-32 bg-gradient-to-b from-sand-100 to-warm-cream">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center fade-in">
+                <div class="relative">
+                    <img src="https://i.ibb.co/Kpnd1st7/azov-sea-400x300.jpg" 
+                        alt="Азовское море" 
+                        class="rounded-3xl shadow-2xl w-full">
+                    <div class="absolute -bottom-4 -right-4 bg-white p-6 rounded-2xl shadow-xl">
+                        <div class="text-3xl md:text-4xl font-bold text-primary-600">120м</div>
+                        <div class="text-gray-600">До берега моря</div>
+                    </div>
+                </div>
+                
+                <div class="space-y-8">
+                    <div>
+                        <h2 class="section-title text-3xl md:text-4xl font-bold text-warm-brown mb-4">Природа</h2>
+                        <p class="text-gray-700 text-lg leading-relaxed">
+                            Всего 120 метров отделяют ваши двери от бескрайних горизонтов Азовского моря. Кучугуры — это место силы, где гармонично сочетаются теплое мелководье и золотые песчаные пляжи, создавая идеальные условия для семейного отдыха. Сам поселок окружен персиковыми полями и виноградниками.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl md:text-3xl font-bold text-warm-brown mb-4">Разнообразие Досуга</h3>
+                        <p class="text-gray-700 text-lg leading-relaxed">
+                            Удачное расположение Азов Патио позволяет гостям насладиться сразу несколькими видами отдыха. Здесь можно совмещать классический пляжный отдых на чистом песке с активным время препровождением, делая отпуск более насыщенным. Вокруг поселка Кучугуры много лиманов, все они рыбные. 
+                        </p>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-4 pt-4">
+                        <div class="bg-white px-5 py-3 rounded-full shadow-md flex items-center gap-2">
+                            <i data-lucide="waves" class="w-5 h-5 text-primary-600"></i>
+                            <span class="text-gray-700">Пляжный отдых</span>
+                        </div>
+                        <div class="bg-white px-5 py-3 rounded-full shadow-md flex items-center gap-2">
+                            <i data-lucide="bike" class="w-5 h-5 text-primary-600"></i>
+                            <span class="text-gray-700">Прогулки</span>
+                        </div>
+                        <div class="bg-white px-5 py-3 rounded-full shadow-md flex items-center gap-2">
+                            <i data-lucide="sun" class="w-5 h-5 text-primary-600"></i>
+                            <span class="text-gray-700">Загар</span>
+                        </div>
+                        <div class="bg-white px-5 py-3 rounded-full shadow-md flex items-center gap-2">
+                            <i data-lucide="camera" class="w-5 h-5 text-primary-600"></i>
+                            <span class="text-gray-700">Фотосессии</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rooms Section -->
+    <section id="rooms" class="py-20 md:py-32 bg-warm-cream">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <span class="inline-block bg-primary-100 text-primary-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">Размещение</span>
+                <h2 class="section-title text-4xl md:text-5xl font-bold text-warm-brown mb-6">Три типа размещения для разных потребностей</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                  
+                </p>
+            </div>
+
+            <!-- ==================== ПАТИО СТАНДАРТ ==================== -->
+            <div class="mb-16 fade-in">
+                <div class="bg-white rounded-3xl shadow-xl overflow-hidden card-hover">
+                    <div class="lg:grid lg:grid-cols-2 gap-0">
+                        <!-- Фото -->
+                        <div class="relative">
+                            <div class="swiper roomSwiper1 h-80 lg:h-96">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <img src="https://i.ibb.co/7J8Mb2s7/photo-2026-03-26-19-47-28.jpg" alt="Патио Стандарт" class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="https://i.ibb.co/zWVFJsqt/photo-2026-03-30-19-39-08.jpg" alt="Интерьер" class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="https://i.ibb.co/rKwW5bvc/photo-2026-03-30-19-39-08-2.jpg" alt="Кухня" class="w-full h-full object-cover">
+                                    </div>
+                                </div>
+                                <div class="swiper-button-next"></div>
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-pagination"></div>
+                            </div>
+                            <button class="absolute bottom-4 right-4 bg-white/90 p-2 rounded-full" onclick="openRoomGallery('standard')">
+                                <i data-lucide="maximize-2" class="w-5 h-5 text-primary-600"></i>
+                            </button>
+                        </div>
+                       
+                        <!-- Текст -->
+                        <div class="p-8 lg:p-12 flex flex-col justify-center">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="bg-primary-100 text-primary-700 px-4 py-1 rounded-full text-sm font-semibold">Стандарт</span>
+                                <span class="text-gray-500">35 м²</span>
+                            </div>
+                            <h3 class="text-3xl font-bold text-warm-brown mb-3">Патио Стандарт</h3>
+                            
+                            <div class="mb-6">
+                                <span class="text-3xl font-bold text-primary-600">от 3500 ₽</span>
+                                <span class="text-sm text-gray-500">/ сутки</span>
+                            </div>
+                            
+                            <p class="text-gray-600 mb-6">Погрузитесь в атмосферу спокойствия в домике из благородного дерева.</p>
+                           
+                            <div class="space-y-3 mb-8">
+                                <div class="flex items-center gap-3 text-gray-700">
+                                    <i data-lucide="users" class="w-5 h-5 text-primary-600"></i>
+                                    <span>До 4 гостей (до 5 за доп. плату)</span>
+                                </div>
+                                <div class="flex items-center gap-3 text-gray-700">
+                                    <i data-lucide="bed-double" class="w-5 h-5 text-primary-600"></i>
+                                    <span>1 двуспальная + 2 односпальные</span>
+                                </div>
+                                <div class="flex items-center gap-3 text-gray-700">
+                                    <i data-lucide="home" class="w-5 h-5 text-primary-600"></i>
+                                    <span>1-комнатный домик с патио</span>
+                                </div>
+                            </div>
+                           
+                            <a href="#contacts" class="inline-flex items-center gap-2 bg-primary-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-primary-600 transition-all w-fit">
+                                <span>Забронировать</span>
+                                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== СЕМЕЙНЫЙ ПАТИО ==================== -->
+            <div class="mb-16 fade-in">
+                <div class="bg-white rounded-3xl shadow-xl overflow-hidden card-hover">
+                    <div class="lg:grid lg:grid-cols-2 gap-0">
+                        <!-- Фото -->
+                        <div class="relative lg:order-2">
+                            <div class="swiper roomSwiper2 h-80 lg:h-96">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <img src="https://i.ibb.co/bn9MFR3/photo-2026-03-30-19-39-01.jpg" alt="Семейный Патио" class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="https://i.ibb.co/5X1BgyQh/photo-2026-03-26-20-06-40.jpg" alt="Интерьер" class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="https://i.ibb.co/0p4Fg7Jp/photo-2026-03-26-20-06-38.jpg" alt="Кухня" class="w-full h-full object-cover">
+                                    </div>
+                                </div>
+                                <div class="swiper-button-next"></div>
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-pagination"></div>
+                            </div>
+                            <button class="absolute bottom-4 right-4 bg-white/90 p-2 rounded-full" onclick="openRoomGallery('family')">
+                                <i data-lucide="maximize-2" class="w-5 h-5 text-primary-600"></i>
+                            </button>
+                        </div>
+                       
+                        <!-- Текст -->
+                        <div class="p-8 lg:p-12 flex flex-col justify-center lg:order-1">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="bg-primary-100 text-primary-700 px-4 py-1 rounded-full text-sm font-semibold">Семейный</span>
+                                <span class="text-gray-500">50 м²</span>
+                            </div>
+                            <h3 class="text-3xl font-bold text-warm-brown mb-3">Семейный Патио</h3>
+                            
+                            <div class="mb-6">
+                                <span class="text-3xl font-bold text-primary-600">от 4500 ₽</span>
+                                <span class="text-sm text-gray-500">/ сутки</span>
+                            </div>
+                            
+                            <p class="text-gray-600 mb-6">Идеальный выбор для семейного отдыха с просторной кухонной зоной.</p>
+                           
+                            <div class="space-y-3 mb-8">
+                                <div class="flex items-center gap-3 text-gray-700">
+                                    <i data-lucide="users" class="w-5 h-5 text-primary-600"></i>
+                                    <span>До 5 гостей</span>
+                                </div>
+                                <div class="flex items-center gap-3 text-gray-700">
+                                    <i data-lucide="bed-double" class="w-5 h-5 text-primary-600"></i>
+                                    <span>2 двуспальные + 1 односпальная</span>
+                                </div>
+                                <div class="flex items-center gap-3 text-gray-700">
+                                    <i data-lucide="home" class="w-5 h-5 text-primary-600"></i>
+                                    <span>2-комнатный домик с кухней</span>
+                                </div>
+                            </div>
+                           
+                            <a href="#contacts" class="inline-flex items-center gap-2 bg-primary-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-primary-600 transition-all w-fit">
+                                <span>Забронировать</span>
+                                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== ПАТИО-ЛЮКС ==================== -->
+            <div class="fade-in">
+                <div class="bg-white rounded-3xl shadow-xl overflow-hidden card-hover border-2 border-primary-200">
+                    <div class="absolute top-4 right-4 z-10 bg-primary-500 text-white px-4 py-1 rounded-full text-sm font-semibold">
+                        Популярный выбор
+                    </div>
+                    <div class="lg:grid lg:grid-cols-2 gap-0">
+                        <!-- Фото -->
+                        <div class="relative">
+                            <div class="swiper roomSwiper3 h-80 lg:h-96">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <img src="https://i.ibb.co/ynHmN1KM/photo-2026-03-30-19-39-05.jpg" alt="Патио-Люкс" class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="https://i.ibb.co/7JkbKCxN/photo-2026-03-30-19-39-47.jpg" alt="Интерьер" class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="https://i.ibb.co/6cLLNTgS/photo-2026-03-30-19-39-43.jpg" alt="Кухня" class="w-full h-full object-cover">
+                                    </div>
+                                </div>
+                                <div class="swiper-button-next"></div>
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-pagination"></div>
+                            </div>
+                            <button class="absolute bottom-4 right-4 bg-white/90 p-2 rounded-full" onclick="openRoomGallery('luxury')">
+                                <i data-lucide="maximize-2" class="w-5 h-5 text-primary-600"></i>
+                            </button>
+                        </div>
+                       
+                        <!-- Текст -->
+                        <div class="p-8 lg:p-12 flex flex-col justify-center">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="bg-primary-100 text-primary-700 px-4 py-1 rounded-full text-sm font-semibold">Люкс</span>
+                                <span class="text-gray-500">60 м² + дворик</span>
+                            </div>
+                            <h3 class="text-3xl font-bold text-warm-brown mb-3">Патио-Люкс</h3>
+                            
+                            <div class="mb-6">
+                                <span class="text-3xl font-bold text-primary-600">от 5000 ₽</span>
+                                <span class="text-sm text-gray-500">/ сутки</span>
+                            </div>
+                            
+                            <p class="text-gray-600 mb-6">Просторный домик с собственным двориком для максимального комфорта.</p>
+                           
+                            <div class="space-y-3 mb-8">
+                                <div class="flex items-center gap-3 text-gray-700">
+                                    <i data-lucide="users" class="w-5 h-5 text-primary-600"></i>
+                                    <span>До 5 гостей (до 6 за доп. плату)</span>
+                                </div>
+                                <div class="flex items-center gap-3 text-gray-700">
+                                    <i data-lucide="bed-double" class="w-5 h-5 text-primary-600"></i>
+                                    <span>1 двуспальная + 3 односпальные</span>
+                                </div>
+                                <div class="flex items-center gap-3 text-gray-700">
+                                    <i data-lucide="home" class="w-5 h-5 text-primary-600"></i>
+                                    <span>2-комнатный домик с кухней и своим двориком</span>
+                                </div>
+                            </div>
+                           
+                            <a href="#contacts" class="inline-flex items-center gap-2 bg-primary-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-primary-600 transition-all w-fit">
+                                <span>Забронировать</span>
+                                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        <!-- ====================== МОДАЛЬНОЕ ОКНО УСПЕШНОГО БРОНИРОВАНИЯ ====================== -->
+    <div id="successModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/70 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full mx-4 overflow-hidden">
+            <!-- Верхняя часть с иконкой -->
+            <div class="bg-gradient-to-br from-primary-500 to-primary-600 py-8 flex flex-col items-center">
+                <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-inner">
+                    <i data-lucide="check-circle" class="w-12 h-12 text-primary-500"></i>
+                </div>
+                <h3 class="text-white text-2xl font-bold mt-4">Заявка отправлена!</h3>
+            </div>
+            
+            <!-- Основной текст -->
+            <div class="p-8 text-center">
+                <p class="text-gray-600 mb-6 leading-relaxed">
+                    Спасибо! Мы получили вашу заявку.<br>
+                    Наш менеджер свяжется с вами в течение 1 часа.
+                </p>
+                
+                <div id="modalBookingInfo" class="bg-sand-50 rounded-2xl p-5 text-left text-sm space-y-2 mb-8">
+                    <!-- Информация о бронировании будет вставляться сюда -->
+                </div>
+                
+                <button onclick="closeSuccessModal()" 
+                        class="w-full bg-primary-500 hover:bg-primary-600 text-white py-4 rounded-2xl font-semibold text-lg transition-all">
+                    Отлично, жду звонка!
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- ====================== КОНЕЦ МОДАЛЬНОГО ОКНА ====================== -->
+        <!-- ====================== НОВАЯ СЕКЦИЯ БРОНИРОВАНИЯ ====================== -->
+    <!-- Booking Form Section -->
+    <section id="booking" class="py-20 md:py-32 bg-warm-cream">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <span class="inline-block bg-primary-100 text-primary-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">Бронирование</span>
+                <h2 class="section-title text-4xl md:text-5xl font-bold text-warm-brown mb-6">Забронируйте свой отдых прямо сейчас</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Заполните форму — мы свяжемся с вами в течение часа и подтвердим бронь</p>
+            </div>
+
+            <div class="max-w-2xl mx-auto bg-white rounded-3xl shadow-xl p-8 md:p-12 fade-in">
+                <form id="bookingForm" 
+                    action="https://formspree.io/f/mreoqjgq" 
+                    method="POST" 
+                    class="space-y-8">
+
+                    <input type="hidden" name="_subject" value="Новая заявка на бронирование Азов Патио">
+                    <input type="hidden" name="_captcha" value="false">
+
+                    <!-- Телефон -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Ваш номер телефона *</label>
+                        <input type="tel" name="phone" required
+                            class="w-full px-5 py-4 border border-gray-300 rounded-2xl focus:outline-none focus:border-primary-500 text-lg"
+                            placeholder="+7 (918) 362-32-77">
+                    </div>
+
+                    <!-- Даты -->
+                    <div class="grid grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Дата заезда *</label>
+                            <input type="date" name="checkin" required
+                                class="w-full px-5 py-4 border border-gray-300 rounded-2xl focus:outline-none focus:border-primary-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Дата выезда *</label>
+                            <input type="date" name="checkout" required
+                                class="w-full px-5 py-4 border border-gray-300 rounded-2xl focus:outline-none focus:border-primary-500">
+                        </div>
+                    </div>
+
+                    <!-- Количество гостей -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Количество гостей *</label>
+                        <select name="guests" required
+                                class="w-full px-5 py-4 border border-gray-300 rounded-2xl focus:outline-none focus:border-primary-500 text-lg">
+                            <option value="">Выберите количество...</option>
+                            <option value="1">1 гость</option>
+                            <option value="2">2 гостя</option>
+                            <option value="3">3 гостя</option>
+                            <option value="4">4 гостя</option>
+                            <option value="5">5 гостей</option>
+                            <option value="6">6 гостей</option>
+                        </select>
+                    </div>
+
+                    <!-- Тип номера -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Какой домик хотите *</label>
+                        <select name="roomType" required
+                                class="w-full px-5 py-4 border border-gray-300 rounded-2xl focus:outline-none focus:border-primary-500 text-lg">
+                            <option value="">Выберите тип размещения...</option>
+                            <option value="Патио Стандарт">Патио Стандарт (от 3500 ₽)</option>
+                            <option value="Семейный Патио">Семейный Патио (от 4500 ₽)</option>
+                            <option value="Патио-Люкс">Патио-Люкс (от 5000 ₽)</option>
+                        </select>
+                    </div>
+
+                    <!-- Животное -->
+                    <div class="flex items-center gap-3">
+                        <input type="checkbox" id="hasPet" name="hasPet">
+                        <label for="hasPet" class="text-lg text-gray-700 font-medium cursor-pointer">Есть домашнее животное</label>
+                    </div>
+
+                    <div id="petDetails" class="hidden">
+                        <label class="block text-sm font-medium text-gray-700">Какое животное (порода, размер)</label>
+                        <input type="text" name="petInfo" 
+                            class="w-full px-5 py-4 border border-gray-300 rounded-2xl focus:outline-none focus:border-primary-500">
+                    </div>
+
+                    <button type="submit" 
+                            class="w-full bg-primary-500 hover:bg-primary-600 text-white py-5 rounded-3xl text-xl font-semibold transition-all">
+                        Отправить заявку на бронирование
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- ====================== КОНЕЦ НОВОЙ СЕКЦИИ ====================== -->
+    <!-- Advantages Section -->
+    <section class="py-20 md:py-32 bg-gradient-to-b from-sand-100 to-warm-cream">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <span class="inline-block bg-primary-100 text-primary-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">На территории комплекса</span>
+                <h2 class="section-title text-4xl md:text-5xl font-bold text-warm-brown mb-6"></h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 fade-in">
+                <div class="bg-white p-8 rounded-3xl shadow-lg text-center card-hover">
+                    <div class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="waves" class="w-8 h-8 text-primary-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-warm-brown mb-3">120 метров до моря</h3>
+                    <p class="text-gray-600">Первая линия, чистый песчаный пляж</p>
+                </div>
+               
+               
+                <div class="bg-white p-8 rounded-3xl shadow-lg text-center card-hover">
+                    <div class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="car" class="w-8 h-8 text-primary-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-warm-brown mb-3">Бесплатная парковка</h3>
+                    <p class="text-gray-600">Собственная парковка на территории</p>
+                </div>
+               
+                <div class="bg-white p-8 rounded-3xl shadow-lg text-center card-hover">
+                    <div class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="flame" class="w-8 h-8 text-primary-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-warm-brown mb-3">Мангальная зона</h3>
+                    <p class="text-gray-600">Со всем необходимым реквизитом</p>
+                </div>
+                                <div class="bg-white p-8 rounded-3xl shadow-lg text-center card-hover">
+                    <div class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="shield" class="w-8 h-8 text-primary-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-warm-brown mb-3">Закрытая территория</h3>
+                    <p class="text-gray-600">Безопасность для всей вашей семьи</p>
+                </div>
+
+                <div class="bg-white p-8 rounded-3xl shadow-lg text-center card-hover">
+                    <div class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="shirt" class="w-8 h-8 text-primary-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-warm-brown mb-3">Прачечная</h3>
+                    <p class="text-gray-600">Стиральная машина для гостей</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ====================== ДОСТОПРИМЕЧАТЕЛЬНОСТИ РЯДОМ ====================== -->
+    <section class="py-20 md:py-32 bg-gradient-to-b from-sand-100 to-warm-cream">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <span class="inline-block bg-primary-100 text-primary-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">Рядом с нами</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-warm-brown mb-6">Что можно посетить рядом</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Интересные места в пределах 30 минут езды от Азов Патио</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 fade-in">
+                <div class="bg-white rounded-3xl overflow-hidden shadow-lg group">
+                    <img src="https://i.ibb.co/70qCP8t/tyeknd42btwd3rqzdsufk7tks-oao5xhyvzyw3hinextp-en9jo3jfbcvdzhhqcp-ps6rdod21mpvcac-lqid0m.jpg" 
+                         alt="Картинг" class="w-full h-56 object-cover group-hover:scale-105 transition-transform">
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl text-warm-brown">Термальные источники (Радоновые ванны)</h3>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl overflow-hidden shadow-lg group">
+                    <img src="https://i.ibb.co/HLLZ7H6h/7d9e88a8-f178-4098-bea5-48d960920605-selcdn.webp" 
+                         alt="Атамань" class="w-full h-56 object-cover group-hover:scale-105 transition-transform">
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl text-warm-brown">Долина лотосов</h3>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl overflow-hidden shadow-lg group">
+                    <img src="https://i.ibb.co/DDXZ632G/images.jpg" 
+                         alt="Дельфинарий" class="w-full h-56 object-cover group-hover:scale-105 transition-transform">
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl text-warm-brown">Обширные лавандовые поля</h3>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl overflow-hidden shadow-lg group">
+                    <img src="https://i.ibb.co/VcNMVjLZ/download.jpg" 
+                         alt="Лаванда" class="w-full h-56 object-cover group-hover:scale-105 transition-transform">
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl text-warm-brown">Азовский дельфинарий «Немо»</h3>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl overflow-hidden shadow-lg group">
+                    <img src="https://i.ibb.co/ZpDvgswq/download.jpg" 
+                         alt="Долина лотосов" class="w-full h-56 object-cover group-hover:scale-105 transition-transform">
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl text-warm-brown">Этнографический комплекс «Атамань»</h3>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl overflow-hidden shadow-lg group">
+                    <img src="https://i.ibb.co/67pLhmwv/download.jpg" 
+                         alt="Термальные источники" class="w-full h-56 object-cover group-hover:scale-105 transition-transform">
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl text-warm-brown">Картинг под открытым небом</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 md:py-32 bg-warm-cream">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <span class="inline-block bg-primary-100 text-primary-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">Галерея</span>
+                <h2 class="section-title text-4xl md:text-5xl font-bold text-warm-brown mb-6">Фотогалерея</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Посмотрите фотографии нашего уютного отеля и территории
+                </p>
+            </div>
+            
+            <!-- ====================== ГАЛЕРЕЯ ====================== -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 fade-in">
+                
+                <!-- Большое фото (первое) -->
+                <div class="col-span-2 row-span-2 relative group overflow-hidden rounded-2xl cursor-pointer" onclick="openMainGallery(0)">
+                    <img src="https://i.ibb.co/cqv0c89/photo-2026-03-30-19-39-29.jpg" alt="Территория" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                        <span class="text-white font-semibold">Территория отеля</span>
+                    </div>
+                </div>
+
+                <!-- Остальные фото -->
+                <div class="relative group overflow-hidden rounded-2xl cursor-pointer" onclick="openMainGallery(1)">
+                    <img src="https://i.ibb.co/m51mZddf/photo-2026-03-30-19-39-03.jpg" alt="Номер" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110">
+                </div>
+                <div class="relative group overflow-hidden rounded-2xl cursor-pointer" onclick="openMainGallery(2)">
+                    <img src="https://i.ibb.co/TMWSQGtD/photo-2026-03-30-19-39-14.jpg" alt="Море" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110">
+                </div>
+                <div class="relative group overflow-hidden rounded-2xl cursor-pointer" onclick="openMainGallery(3)">
+                    <img src="https://i.ibb.co/1GLntkWD/photo-2026-03-30-19-39-13.jpg" alt="Кухня" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110">
+                </div>
+                <div class="relative group overflow-hidden rounded-2xl cursor-pointer" onclick="openMainGallery(4)">
+                    <img src="https://i.ibb.co/Gfv4jX1c/photo-2026-03-30-19-39-07.jpg" alt="Детская площадка" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110">
+                </div>
+
+                <!-- Новые фото начинаются здесь -->
+                <div class="relative group overflow-hidden rounded-2xl cursor-pointer" onclick="openMainGallery(8)">
+                    <img src="https://i.ibb.co/99hjZSkY/image.png" alt="Фото 1" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110">
+                </div>
+                <div class="relative group overflow-hidden rounded-2xl cursor-pointer" onclick="openMainGallery(9)">
+                    <img src="https://i.ibb.co/xtCGv3dV/image.png" alt="Фото 2" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110">
+                </div>
+                <div class="relative group overflow-hidden rounded-2xl cursor-pointer" onclick="openMainGallery(10)">
+                    <img src="https://i.ibb.co/KxXxdq2L/image.png" alt="Фото 3" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110">
+                </div>
+                <div class="relative group overflow-hidden rounded-2xl cursor-pointer" onclick="openMainGallery(11)">
+                    <img src="https://i.ibb.co/LdCFHKxv/image.png" alt="Фото 4" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110">
+                </div>
+                <div class="relative group overflow-hidden rounded-2xl cursor-pointer" onclick="openMainGallery(12)">
+                    <img src="https://i.ibb.co/1fTMfv1D/image.png" alt="Фото 5" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110">
+                </div>
+                <div class="relative group overflow-hidden rounded-2xl cursor-pointer" onclick="openMainGallery(13)">
+                    <img src="https://i.ibb.co/0R31x3S2/image.png" alt="Фото 6" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110">
+                </div>
+                <div class="relative group overflow-hidden rounded-2xl cursor-pointer" onclick="openMainGallery(14)">
+                    <img src="https://i.ibb.co/4nqv76hC/image.png" alt="Фото 7" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110">
+                </div>
+                <div class="relative group overflow-hidden rounded-2xl cursor-pointer" onclick="openMainGallery(15)">
+                    <img src="https://i.ibb.co/zVQRQWHn/image.png" alt="Фото 8" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110">
+                </div>
+                <div class="relative group overflow-hidden rounded-2xl cursor-pointer" onclick="openMainGallery(16)">
+                    <img src="https://i.ibb.co/qQgqQPH/image.png" alt="Фото 9" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110">
+                </div>
+                <div class="relative group overflow-hidden rounded-2xl cursor-pointer" onclick="openMainGallery(17)">
+                    <img src="https://i.ibb.co/Ps6X9LJ6/image.png" alt="Фото 10" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110">
+                </div>
+                <div class="relative group overflow-hidden rounded-2xl cursor-pointer" onclick="openMainGallery(18)">
+                    <img src="https://i.ibb.co/YV7crm5/image.png" alt="Фото 11" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110">
+                </div>
+                <div class="relative group overflow-hidden rounded-2xl cursor-pointer" onclick="openMainGallery(19)">
+                    <img src="https://i.ibb.co/q3f0HkYx/image.png" alt="Фото 12" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="py-20 md:py-32 bg-gradient-to-b from-sand-100 to-warm-cream">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <span class="inline-block bg-primary-100 text-primary-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">Отзывы</span>
+                <h2 class="section-title text-4xl md:text-5xl font-bold text-warm-brown mb-6">Что говорят гости</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 fade-in">
+                <div class="bg-white p-8 rounded-3xl shadow-lg">
+                    <div class="flex items-center gap-1 mb-4">
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        Это очень душевное место с комфортным проживанием и морем в шаговой доступности. Приезжая сюда повторно, чувствуешь, что возвращаешься как бы к близким людям которых просто давно не видел. Много места для детей, комфортные дома из лиственницы, мебель из массива дуба, семейная атмосфера, дружелюбие и забота хозяев это то, что вас здесь ждёт.
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 bg-primary-200 rounded-full flex items-center justify-center">
+                            <i data-lucide="user" class="w-6 h-6 text-primary-600"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-warm-brown">Александр Абашкин</div>
+                            <div class="text-sm text-gray-500">abashkin-aleksan</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-8 rounded-3xl shadow-lg">
+                    <div class="flex items-center gap-1 mb-4">
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        Постоянные клиенты вот уже более 5 лет. Цена/качество по Кучугурам. Размещение в домиках со всеми удобствами. В части домиков своя кухня. Отдельная территория. Дети уже сдружились с такими же детьми постоянных гостей. Дружелюбная атмосфера. Отличные и внимательные хозяева. Близость к морю. Вернемся еще)
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 bg-primary-200 rounded-full flex items-center justify-center">
+                            <i data-lucide="user" class="w-6 h-6 text-primary-600"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-warm-brown">Сергей Солдатов</div>
+                            <div class="text-sm text-gray-500">Постоянный гость</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-8 rounded-3xl shadow-lg">
+                    <div class="flex items-center gap-1 mb-4">
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        Классное место для семейного отдыха. Отдельный домик с верандой, на которой расположен стол, холодильник и микроволновка. До моря три минуты пешком с ребенком. Не центральный пляж, то есть меньшее количество народа. Есть наивкуснейшее домашнее вино. Кто хочет оказаться в тихом месте, на пляже, где малое количество народу и абсолютно счастливые дети — вам сюда.
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 bg-primary-200 rounded-full flex items-center justify-center">
+                            <i data-lucide="user" class="w-6 h-6 text-primary-600"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-warm-brown">Настя Михайлова</div>
+                            <div class="text-sm text-gray-500">Гость отеля</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 md:py-32 bg-warm-cream">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <span class="inline-block bg-primary-100 text-primary-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">FAQ</span>
+                <h2 class="section-title text-4xl md:text-5xl font-bold text-warm-brown mb-6">Частые вопросы</h2>
+            </div>
+            
+            <div class="space-y-4 fade-in">
+                <div class="faq-item bg-white rounded-2xl shadow-md overflow-hidden">
+                    <button class="faq-trigger w-full px-6 py-5 text-left flex items-center justify-between" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-warm-brown text-lg">Есть ли интернет и кондиционер?</span>
+                        <i data-lucide="chevron-down" class="w-6 h-6 text-primary-600 transition-transform"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5">
+                        <p class="text-gray-600">Во всех номерах есть бесплатный Wi-Fi и кондиционеры.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item bg-white rounded-2xl shadow-md overflow-hidden">
+                    <button class="faq-trigger w-full px-6 py-5 text-left flex items-center justify-between" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-warm-brown text-lg">Как добраться от вокзала?</span>
+                        <i data-lucide="chevron-down" class="w-6 h-6 text-primary-600 transition-transform"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5">
+                        <p class="text-gray-600">Мы организуем трансфер от ж/д вокзала или автовокзала.(платно)</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item bg-white rounded-2xl shadow-md overflow-hidden">
+                    <button class="faq-trigger w-full px-6 py-5 text-left flex items-center justify-between" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-warm-brown text-lg">Можно ли с животными?</span>
+                        <i data-lucide="chevron-down" class="w-6 h-6 text-primary-600 transition-transform"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5">
+                        <p class="text-gray-600">Да, мы рады гостям с домашними животными (собаки). Требуется предупреждение при бронировании.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item bg-white rounded-2xl shadow-md overflow-hidden">
+                    <button class="faq-trigger w-full px-6 py-5 text-left flex items-center justify-between" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-warm-brown text-lg">Есть ли питание?</span>
+                        <i data-lucide="chevron-down" class="w-6 h-6 text-primary-600 transition-transform"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5">
+                        <p class="text-gray-600">Основное размещение без питания, но в некоторых номерах есть кухня или кухонная зона. Также на территории есть общая оборудованная кухня. Рядом кафе и столовые (5-10 минут ходьбы). Организация питания(обед, ужин), доставка курьером в домик. </p>
+                    </div>
+                </div>
+                
+                <div class="faq-item bg-white rounded-2xl shadow-md overflow-hidden">
+                    <button class="faq-trigger w-full px-6 py-5 text-left flex items-center justify-between" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-warm-brown text-lg">Время заезда и выезда?</span>
+                        <i data-lucide="chevron-down" class="w-6 h-6 text-primary-600 transition-transform"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5">
+                        <p class="text-gray-600">Заезд с 14:00, выезд до 11:00.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+      <!-- Contacts Section -->
+    <section id="contacts" class="py-20 md:py-32 bg-gradient-to-b from-sand-100 to-warm-cream">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <span class="inline-block bg-primary-100 text-primary-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">Контакты</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-warm-brown mb-6">Свяжитесь с нами</h2>
+            </div>
+           
+            <div class="grid lg:grid-cols-2 gap-12 fade-in items-start">
+                
+                <!-- Левая колонка - Контактная информация -->
+                <div class="bg-white rounded-3xl shadow-xl p-8 lg:p-10">
+                    <h3 class="text-2xl font-bold text-warm-brown mb-8">Контактная информация</h3>
+                   
+                    <div class="space-y-7">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary-100 rounded-2xl flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="phone" class="w-6 h-6 text-primary-600"></i>
+                            </div>
+                            <div>
+                                <div class="text-gray-500 mb-1">Телефон</div>
+                                <a href="tel:+79183623277" class="text-xl font-semibold text-warm-brown hover:text-primary-600 transition-colors">+7 918 362 32 77</a>
+                            </div>
+                        </div>
+                       
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary-100 rounded-2xl flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="mail" class="w-6 h-6 text-primary-600"></i>
+                            </div>
+                            <div>
+                                <div class="text-gray-500 mb-1">Email</div>
+                                <a href="mailto:azovpatio@mail.com" class="text-xl font-semibold text-warm-brown hover:text-primary-600 transition-colors">azovpatio@mail.com</a>
+                            </div>
+                        </div>
+                       
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary-100 rounded-2xl flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="map-pin" class="w-6 h-6 text-primary-600"></i>
+                            </div>
+                            <div>
+                                <div class="text-gray-500 mb-1">Адрес</div>
+                                <p class="text-lg font-semibold text-warm-brown leading-tight">
+                                    Краснодарский край, Темрюкский район,<br>
+                                    пос. Кучугуры, ул. Молодежная 56
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <!-- Мессенджеры -->
+                    <div class="mt-12 pt-8 border-t border-gray-200">
+                        <p class="text-gray-600 mb-5">Напишите нам в мессенджере:</p>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <a href="https://wa.me/79183623277" target="_blank" 
+                               class="bg-green-500 hover:bg-green-600 text-white py-4 rounded-2xl flex items-center justify-center gap-2 transition-all font-medium">
+                                <i data-lucide="message-circle" class="w-5 h-5"></i>
+                                <span>WhatsApp</span>
+                            </a>
+                            
+                            <a href="https://t.me/+79183623277" target="_blank" 
+                               class="bg-blue-500 hover:bg-blue-600 text-white py-4 rounded-2xl flex items-center justify-center gap-2 transition-all font-medium">
+                                <i data-lucide="send" class="w-5 h-5"></i>
+                                <span>Telegram</span>
+                            </a>
+                            
+                            <a href="https://vk.com/azovpatio" target="_blank" 
+                               class="bg-[#0077FF] hover:bg-[#0066DD] text-white py-4 rounded-2xl flex items-center justify-center gap-2 transition-all font-medium">
+                                <i data-lucide="users" class="w-5 h-5"></i>
+                                <span>VK</span>
+                            </a>
+                            
+                            <a href="https://max.ru/u/f9LHodD0cOJ-ZAN-H31su82PsaGyM7rJNdObjqisZ41mGLzF_wbkhJtkGFo" target="_blank" 
+                               class="bg-[#001A33] hover:bg-[#0077FF] text-white py-4 rounded-2xl flex items-center justify-center gap-2 transition-all font-medium">
+                                <i data-lucide="message-square" class="w-5 h-5"></i>
+                                <span>MAX</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Правая колонка - Карта -->
+                <div class="rounded-3xl overflow-hidden shadow-xl h-full min-h-[520px]">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2800.7409160129105!2d36.944402312045455!3d45.41456383662827!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40eeee9f46c476bd%3A0xbce9b499551894e5!2z0JzQvtC70L7QtNGR0LbQvdCw0Y8g0YPQuy4sIDU2LCDQmtGD0YfRg9Cz0YPRgNGLLCDQmtGA0LDRgdC90L7QtNCw0YDRgdC60LjQuSDQutGA0LDQuSwg0KDQvtGB0YHQuNGPLCAzNTM1NDc!5e0!3m2!1sru!2snl!4v1774899004886!5m2!1sru!2snl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-warm-brown text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <i data-lucide="home" class="w-8 h-8 text-caramel-400"></i>
+                        <span class="text-xl font-bold">Азов Патио</span>
+                    </div>
+                    <p class="text-white/70">
+                        Уютный гостиничный дворик на первой линии Азовского моря в Кучугурах
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Навигация</h4>
+                    <ul class="space-y-2 text-white/70">
+                        <li><a href="#about" class="hover:text-caramel-400 transition-colors">О нас</a></li>
+                        <li><a href="#rooms" class="hover:text-caramel-400 transition-colors">Номера</a></li>
+                        <li><a href="#gallery" class="hover:text-caramel-400 transition-colors">Галерея</a></li>
+                        <li><a href="#reviews" class="hover:text-caramel-400 transition-colors">Отзывы</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Контакты</h4>
+                    <ul class="space-y-2 text-white/70">
+                        <li>+7 918 362 32 77</li>
+                        <li>azovpatio@mail.com</li>
+                        <li>пос. Кучугуры, ул. Молодежная 56</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/20 pt-8 text-center text-white/60">
+                <p>&copy; 2026 Азов Патио. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Gallery Modal -->
+    <div id="galleryModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 p-4">
+        <button class="absolute top-4 right-4 text-white hover:text-caramel-400 transition-colors" onclick="closeGalleryModal()">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        
+        <button class="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:text-caramel-400 transition-colors" onclick="prevSlide()">
+            <i data-lucide="chevron-left" class="w-10 h-10"></i>
+        </button>
+        
+        <button class="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-caramel-400 transition-colors" onclick="nextSlide()">
+            <i data-lucide="chevron-right" class="w-10 h-10"></i>
+        </button>
+        
+        <img id="modalImage" src="" alt="Gallery" class="max-w-full max-h-[90vh] object-contain rounded-lg">
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+        
+        // Initialize Swipers for rooms
+        const roomSwiper1 = new Swiper('.roomSwiper1', {
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+        
+        const roomSwiper2 = new Swiper('.roomSwiper2', {
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+        
+        const roomSwiper3 = new Swiper('.roomSwiper3', {
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+        
+        // Gallery Modal
+        <!-- ====================== ГАЛЕРЕИ НОМЕРОВ ====================== -->
+
+        // Главная галерея — все фото вместе
+        const mainGalleryImages = [
+            // Старые фото
+            'https://i.ibb.co/cqv0c89/photo-2026-03-30-19-39-29.jpg',
+            'https://i.ibb.co/m51mZddf/photo-2026-03-30-19-39-03.jpg',
+            'https://i.ibb.co/TMWSQGtD/photo-2026-03-30-19-39-14.jpg',
+            'https://i.ibb.co/1GLntkWD/photo-2026-03-30-19-39-13.jpg',
+            'https://i.ibb.co/Gfv4jX1c/photo-2026-03-30-19-39-07.jpg',
+            'https://i.ibb.co/bgzBMGRg/photo-2026-03-30-19-39-02.jpg',
+            'https://i.ibb.co/HpKJjGHk/photo-2026-03-30-19-39-53.jpg',
+            'https://i.ibb.co/SXDJSQGd/photo-2026-03-30-19-39-20.jpg',
+
+            // Новые фотографии (добавлены в конец)
+            'https://i.ibb.co/99hjZSkY/image.png',
+            'https://i.ibb.co/xtCGv3dV/image.png',
+            'https://i.ibb.co/KxXxdq2L/image.png',
+            'https://i.ibb.co/LdCFHKxv/image.png',
+            'https://i.ibb.co/1fTMfv1D/image.png',
+            'https://i.ibb.co/0R31x3S2/image.png',
+            'https://i.ibb.co/4nqv76hC/image.png',
+            'https://i.ibb.co/zVQRQWHn/image.png',
+            'https://i.ibb.co/qQgqQPH/image.png',
+            'https://i.ibb.co/Ps6X9LJ6/image.png',
+            'https://i.ibb.co/YV7crm5/image.png',
+            'https://i.ibb.co/q3f0HkYx/image.png'
+        ];
+
+        // Галереи номеров
+        const standardImages = [
+            'https://i.ibb.co/7J8Mb2s7/photo-2026-03-26-19-47-28.jpg',
+            'https://i.ibb.co/zWVFJsqt/photo-2026-03-30-19-39-08.jpg', 
+            'https://i.ibb.co/rKwW5bvc/photo-2026-03-30-19-39-08-2.jpg'
+        ];
+
+        const familyImages = [
+            'https://i.ibb.co/bn9MFR3/photo-2026-03-30-19-39-01.jpg',
+            'https://i.ibb.co/5X1BgyQh/photo-2026-03-26-20-06-40.jpg',
+            'https://i.ibb.co/0p4Fg7Jp/photo-2026-03-26-20-06-38.jpg',
+            'https://i.ibb.co/b8Nv3KQ/photo-2026-03-26-20-06-46.jpg',
+            'https://i.ibb.co/xqVVDyQd/photo-2026-03-26-20-06-52.jpg',
+            'https://i.ibb.co/Q3hmsc7w/photo-2026-03-26-20-06-44.jpg'
+        ];
+
+        const luxuryImages = [
+            'https://i.ibb.co/ynHmN1KM/photo-2026-03-30-19-39-05.jpg',
+            'https://i.ibb.co/7JkbKCxN/photo-2026-03-30-19-39-47.jpg',
+            'https://i.ibb.co/6cLLNTgS/photo-2026-03-30-19-39-43.jpg',
+            'https://i.ibb.co/rPcwVWG/photo-2026-03-30-19-39-44.jpg',
+            'https://i.ibb.co/PzMGMspJ/photo-2026-03-30-19-39-45.jpg',
+            'https://i.ibb.co/LzrsmGDW/photo-2026-03-30-19-39-46.jpg',
+            'https://i.ibb.co/bgPmntpS/photo-2026-03-30-19-39-41.jpg',
+            'https://i.ibb.co/8gVNvqMV/photo-2026-03-30-19-39-42.jpg',
+            'https://i.ibb.co/8gkpkLzm/photo-2026-03-30-19-39-38.jpg'
+        ];
+
+        let currentImages = [];
+        let currentIndex = 0;
+
+        function openRoomGallery(type) {
+            if (type === 'standard') currentImages = standardImages;
+            else if (type === 'family') currentImages = familyImages;
+            else if (type === 'luxury') currentImages = luxuryImages;
+
+            currentIndex = 0;
+            document.getElementById('modalImage').src = currentImages[0];
+            showModal();
+        }
+
+        function openMainGallery(index) {
+            currentImages = mainGalleryImages;
+            currentIndex = index;
+            document.getElementById('modalImage').src = currentImages[index];
+            showModal();
+        }
+
+        function showModal() {
+            const modal = document.getElementById('galleryModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeGalleryModal() {
+            const modal = document.getElementById('galleryModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        function nextSlide() {
+            if (currentImages.length <= 1) return;
+            currentIndex = (currentIndex + 1) % currentImages.length;
+            document.getElementById('modalImage').src = currentImages[currentIndex];
+        }
+
+        function prevSlide() {
+            if (currentImages.length <= 1) return;
+            currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+            document.getElementById('modalImage').src = currentImages[currentIndex];
+        }
+
+        // Закрытие по клавишам
+        document.addEventListener('keydown', function(e) {
+            if (document.getElementById('galleryModal').classList.contains('hidden')) return;
+            
+            if (e.key === 'Escape') closeGalleryModal();
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+        
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeGalleryModal();
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+        
+        // FAQ Toggle
+        function toggleFaq(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('i');
+            
+            content.classList.toggle('hidden');
+            icon.style.transform = content.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
+        
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Navbar background on scroll
+        const navbar = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-md');
+            } else {
+                navbar.classList.remove('shadow-md');
+            }
+        });
+        
+        const hasPetCheckbox = document.getElementById('hasPet');
+        const petDetails = document.getElementById('petDetails');
+
+        hasPetCheckbox.addEventListener('change', () => {
+            if (hasPetCheckbox.checked) {
+                petDetails.classList.remove('hidden');
+            } else {
+                petDetails.classList.add('hidden');
+            }
+        });
+
+        const bookingForm = document.getElementById('bookingForm');
+        const successModal = document.getElementById('successModal');
+        const modalBookingInfo = document.getElementById('modalBookingInfo');
+
+        bookingForm.addEventListener('submit', function (e) {
+
+
+            const phone = document.getElementById('phone').value;
+            const checkin = document.getElementById('checkin').value;
+            const checkout = document.getElementById('checkout').value;
+            const guests = document.getElementById('guests').value;
+            const roomType = document.getElementById('roomType').value;
+            const petInfo = document.getElementById('petInfo').value;
+
+            // Формируем красивый текст для модального окна
+            let infoHTML = `
+                <strong>Телефон:</strong> ${phone}<br>
+                <strong>Заезд:</strong> ${checkin} — <strong>Выезд:</strong> ${checkout}<br>
+                <strong>Гостей:</strong> ${guests}<br>
+                <strong>Домик:</strong> ${roomType}
+            `;
+            
+            if (petInfo) {
+                infoHTML += `<br><strong>Животное:</strong> ${petInfo}`;
+            }
+
+            modalBookingInfo.innerHTML = infoHTML;
+
+            // Показываем модальное окно
+            successModal.classList.remove('hidden');
+            successModal.classList.add('flex');
+
+            // Сброс формы
+            bookingForm.reset();
+            petDetails.classList.add('hidden');
+            hasPetCheckbox.checked = false;
+        });
+
+        function closeSuccessModal() {
+            successModal.classList.add('hidden');
+            successModal.classList.remove('flex');
+        }
+
+        // Закрытие модального окна по клику вне его
+        successModal.addEventListener('click', function(e) {
+            if (e.target === successModal) {
+                closeSuccessModal();
+            }
+        });
+    </script>
+</body>
+</html>
